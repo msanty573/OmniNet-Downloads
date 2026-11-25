@@ -1,0 +1,56 @@
+# Maker list — lives in msanty573/OmniNet-Downloads as .github/workflows/maker-list.yml
+# (source: the private OmniNet repo's packaging/maker-list.yml; the script is
+# packaging/make_oui.py, copied to tools/make_oui.py). Once a month rebuilds the MAC-address
+# maker list from the IEEE registers and publishes oui.tsv.gz + oui.json on the `maker-list`
+# branch, where OmniNet and OmniMonitor check for it every 30 days (scan/vendors.refresh).
+# The .gz is repeatable, so a month with no IEEE changes makes no commit and no downloads.
+name: Maker list
+
+on:
+  schedule:
+    - cron: "41 6 2 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: maker-list
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: main
+          sparse-checkout: tools
+      - name: Check out the maker-list branch
+        run: |
+          if git ls-remote --exit-code "https://github.com/${GITHUB_REPOSITORY}" refs/heads/maker-list >/dev/null; then
+            git clone --depth 1 --branch maker-list "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}" list
+          else
+            mkdir list && git -C list init -q -b maker-list
+            git -C list remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}"
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Rebuild from the IEEE registers
+        run: |
+          python3 main/tools/make_oui.py new
+          python3 - <<'PY'
+          import json, sys
+          m = json.load(open("new/oui.json"))
+          if m["count"] < 40000:
+              sys.exit(f"Only {m['count']} prefixes — refusing to publish a broken list.")
+          PY
+      - name: Publish if it changed
+        run: |
+          if [ -f list/oui.tsv.gz ] && cmp -s new/oui.tsv.gz list/oui.tsv.gz; then echo "No change."; exit 0; fi
+          cp new/oui.tsv.gz new/oui.json list/
+          cd list
+          git add -A
+          git -c user.name="OmniNet maker list" -c user.email="maker-list@omninet.invalid" commit -q -m "Maker list $(date -u +%F)"
+          git push -q origin HEAD:maker-list
