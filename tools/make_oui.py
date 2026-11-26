@@ -1,4 +1,4 @@
-"""Rebuild src/omninet/assets/oui.tsv.gz, the MAC-address maker list.
+"""Rebuild src/mjsnet/assets/oui.tsv.gz, the MAC-address maker list.
 
 Source: the IEEE registers (MA-L, MA-M, MA-S) as JSON from
 https://github.com/silverwind/oui-data (BSD-2-Clause, packaging/licenses/oui-data-LICENSE.txt),
@@ -22,11 +22,11 @@ import urllib.request
 from pathlib import Path
 
 URL = "https://raw.githubusercontent.com/silverwind/oui-data/master/index.json"
-OUT = Path(__file__).resolve().parent.parent / "src" / "omninet" / "assets" / "oui.tsv.gz"
+OUT = Path(__file__).resolve().parent.parent / "src" / "mjsnet" / "assets" / "oui.tsv.gz"
 
 
 def main(out: Path = OUT, info: bool = False) -> None:
-    req = urllib.request.Request(URL, headers={"User-Agent": "omninet-build"})
+    req = urllib.request.Request(URL, headers={"User-Agent": "mjsnet-build"})
     with urllib.request.urlopen(req, timeout=120) as r:
         data = json.load(r)
     rows = {}
