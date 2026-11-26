@@ -1,0 +1,74 @@
+Package: mjsnet
+Version: 1.2.3-1
+Architecture: arm64
+Maintainer: MJS Applications <support@mjsapps.net>
+Installed-Size: 229920
+Depends: libc6 (>= 2.43), libfontconfig1, libfreetype6, libxkbcommon0, libxkbcommon-x11-0, libxcb-cursor0, libxcb-icccm4, libxcb-keysyms1, libegl1, libgl1, hicolor-icon-theme
+Breaks: omninet (<< 1.2.3-1)
+Replaces: omninet (<< 1.2.3-1)
+Filename: ./mjsnet-1.2.3-1.ubuntu.arm64.deb
+Size: 65784276
+MD5sum: 5fc88b4b962a2162479a12e54edadfb7
+SHA1: 7edb705752859d6b0b8e0b3f073e2a434168e897
+SHA256: 3cb0eeeaa24a90e008bac57ebadea360b5175ea274a3a6e98dbd6f623a21c8b4
+Section: net
+Priority: optional
+Homepage: https://mjsapps.net/mjsnet/
+Description: See every device on your network and what it exposes
+ MJSNet finds every device on your network, identifies its maker, model and
+ operating system, lists its open ports, checks for security issues and
+ known vulnerabilities, maps mesh networks and exports PDF, Excel and CSV.
+
+Package: mjsnet
+Version: 1.2.3-1
+Architecture: amd64
+Maintainer: MJS Applications <support@mjsapps.net>
+Installed-Size: 225177
+Depends: libc6 (>= 2.43), libfontconfig1, libfreetype6, libxkbcommon0, libxkbcommon-x11-0, libxcb-cursor0, libxcb-icccm4, libxcb-keysyms1, libegl1, libgl1, hicolor-icon-theme
+Breaks: omninet (<< 1.2.3-1)
+Replaces: omninet (<< 1.2.3-1)
+Filename: ./mjsnet-1.2.3-1.ubuntu.amd64.deb
+Size: 69772424
+MD5sum: ef83a9e86115cb4dfe5e236cf77a302c
+SHA1: 1602054a2fad87e3cbedbfce62cfee0326cd93de
+SHA256: eace73144775cdf10f3397cca0865bfbf03bc0f1788dda17334157aa619e95d9
+Section: net
+Priority: optional
+Homepage: https://mjsapps.net/mjsnet/
+Description: See every device on your network and what it exposes
+ MJSNet finds every device on your network, identifies its maker, model and
+ operating system, lists its open ports, checks for security issues and
+ known vulnerabilities, maps mesh networks and exports PDF, Excel and CSV.
+
+Package: omninet
+Version: 1.2.3-1
+Architecture: arm64
+Maintainer: MJS Applications <support@mjsapps.net>
+Depends: mjsnet (= 1.2.3-1)
+Filename: ./omninet-1.2.3-1.ubuntu.arm64.deb
+Size: 800
+MD5sum: 69a82e9d3d01c1af014dc7f170e7baef
+SHA1: 25374c35589fbb166f6c8df8e3490ebb8adbb39b
+SHA256: 6eb31bcb3daab7924f100bb0653f3f829053629e0d7f9581ed15d8635eae4a06
+Section: oldlibs
+Priority: optional
+Homepage: https://mjsapps.net/mjsnet/
+Description: transitional package: OmniNet is now MJSNet
+ OmniNet was renamed MJSNet. This empty package installs MJSNet and can be removed.
+
+Package: omninet
+Version: 1.2.3-1
+Architecture: amd64
+Maintainer: MJS Applications <support@mjsapps.net>
+Depends: mjsnet (= 1.2.3-1)
+Filename: ./omninet-1.2.3-1.ubuntu.amd64.deb
+Size: 800
+MD5sum: 547246b29787d272bc4e38959d97c7dc
+SHA1: a7835da48cd7ccf60b60ec8deb8178e1042646b8
+SHA256: 73dd3df4ec8e213f1a8541b58c981426c8d5383103566c16aa3d976171be5dc8
+Section: oldlibs
+Priority: optional
+Homepage: https://mjsapps.net/mjsnet/
+Description: transitional package: OmniNet is now MJSNet
+ OmniNet was renamed MJSNet. This empty package installs MJSNet and can be removed.
+

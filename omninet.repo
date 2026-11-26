@@ -1,0 +1,7 @@
+[mjsnet]
+name=MJSNet
+baseurl=https://msanty573.github.io/OmniNet-Downloads/rpm/el10/$basearch/
+enabled=1
+gpgcheck=1
+gpgkey=https://msanty573.github.io/OmniNet-Downloads/RPM-GPG-KEY-omninet
+metadata_expire=6h
